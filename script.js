@@ -135,7 +135,7 @@ function validarEnviar(formId, destino) {
   
   const msg = `Olá! Quero cadastrar meu anúncio no Portal Araripe.\n\n📋 *Título:* ${titulo}\n📍 *Cidade:* ${cidade}\n📞 *Telefone:* ${telefone}\n\nGostaria de mais informações sobre como publicar meu anúncio.`;
   
-  const wpp = `https://wa.me/5588999999999?text=${encodeURIComponent(msg)}`;
+  const wpp = `https://wa.me/5588994893176?text=${encodeURIComponent(msg)}`;
   window.open(wpp, '_blank');
 }
 
