@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Araripe — Imóveis & Serviços</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- BANNER TOPO -->
+<div class="top-banner">
+  ✦ Lançamento Oficial: <strong>Plano Profissional GRÁTIS por 3 meses!</strong> <a href="planos.html">Ver Planos →</a>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#2563EB"/>
+          <path d="M18 8L6 18H10V28H16V22H20V28H26V18H30L18 8Z" fill="white"/>
+          <circle cx="18" cy="11" r="2.5" fill="#F97316"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Portal Araripe</span>
+        <span class="logo-sub">IMÓVEIS & SERVIÇOS</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="nav-link active">Inicial</a>
+      <a href="alugar.html" class="nav-link">Para Alugar</a>
+      <a href="venda.html" class="nav-link">Para Venda</a>
+      <a href="prestadores.html" class="nav-link">Prestadores</a>
+      <a href="planos.html" class="nav-link">Planos</a>
+      <a href="contato.html" class="nav-link">Contato</a>
+    </nav>
+    <a href="anunciar.html" class="btn-primary">Anunciar Agora</a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Inicial</a>
+    <a href="alugar.html">Para Alugar</a>
+    <a href="venda.html">Para Venda</a>
+    <a href="prestadores.html">Prestadores</a>
+    <a href="planos.html">Planos</a>
+    <a href="contato.html">Contato</a>
+    <a href="anunciar.html" class="btn-primary">Anunciar Agora</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="hero-text">
+      <span class="hero-badge">✦ A plataforma de imóveis do Cariri</span>
+      <h1 class="hero-title">Do Cariri.<br><em>Para o Cariri.</em></h1>
+      <p class="hero-desc">Encontre o imóvel ideal ou contrate profissionais qualificados na região do Cariri cearense. Simples, confiável e regional.</p>
+      <div class="hero-btns">
+        <a href="alugar.html" class="btn-primary">Ver Imóveis</a>
+        <a href="anunciar.html" class="btn-outline">Anunciar Imóvel</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>5+</strong><span>Cidades</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><strong>100%</strong><span>Regional</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><strong>Grátis</strong><span>Para começar</span></div>
+      </div>
+    </div>
+    <div class="search-card">
+      <h3>Busca Rápida</h3>
+      <div class="search-form">
+        <div class="form-group">
+          <label>O que você procura?</label>
+          <select id="tipo-busca">
+            <option value="">Imóvel ou Serviço?</option>
+            <option value="imovel">Imóvel</option>
+            <option value="servico">Prestador de Serviço</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cidade</label>
+          <select id="cidade-busca">
+            <option value="">Qualquer cidade</option>
+            <option>Juazeiro do Norte</option>
+            <option>Crato</option>
+            <option>Barbalha</option>
+            <option>Missão Velha</option>
+            <option>Chapada do Araripe</option>
+          </select>
+        </div>
+        <div class="form-group" id="grupo-tipo-imovel">
+          <label>Tipo de Imóvel</label>
+          <select id="tipo-imovel">
+            <option value="">Qualquer tipo</option>
+            <option>Casa</option>
+            <option>Apartamento</option>
+            <option>Terreno</option>
+            <option>Comercial</option>
+            <option>Chácara/Sítio</option>
+          </select>
+        </div>
+        <div class="form-group" id="grupo-preco">
+          <label>Preço máximo (R$)</label>
+          <input type="number" id="preco-max" placeholder="Ex: 300000">
+        </div>
+        <button class="btn-search" onclick="buscar()">🔍 Buscar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon blue">🏠</div>
+        <h3>Imóveis Verificados</h3>
+        <p>Casas, apartamentos, terrenos e imóveis comerciais verificados em toda a região do Cariri.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange">👷</div>
+        <h3>Prestadores Qualificados</h3>
+        <p>Conecte-se com profissionais experientes: eletricistas, pedreiros, arquitetos e muito mais.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon blue">📍</div>
+        <h3>100% Regional</h3>
+        <p>Focado no Cariri cearense. Juazeiro, Crato, Barbalha, Missão Velha e Chapada do Araripe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMÓVEIS EM DESTAQUE -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Imóveis em <em>Destaque</em></h2>
+      <p>Os melhores imóveis da região do Cariri</p>
+    </div>
+    <div class="imoveis-grid" id="imoveis-destaque">
+      <div class="imovel-card">
+        <div class="imovel-img" style="background: linear-gradient(135deg, #2563EB20, #F9731620);">
+          <div class="imovel-badge aluguel">Aluguel</div>
+          <div class="imovel-img-placeholder">🏠</div>
+        </div>
+        <div class="imovel-info">
+          <h4>Casa com 3 quartos — Juazeiro do Norte</h4>
+          <p class="imovel-local">📍 Bairro João Pessoa</p>
+          <div class="imovel-detalhes">
+            <span>🛏 3 quartos</span>
+            <span>🚿 2 banheiros</span>
+            <span>🚗 2 vagas</span>
+          </div>
+          <div class="imovel-preco">R$ 1.200<span>/mês</span></div>
+        </div>
+      </div>
+      <div class="imovel-card">
+        <div class="imovel-img" style="background: linear-gradient(135deg, #2563EB20, #F9731620);">
+          <div class="imovel-badge venda">Venda</div>
+          <div class="imovel-img-placeholder">🏡</div>
+        </div>
+        <div class="imovel-info">
+          <h4>Casa ampla — Crato</h4>
+          <p class="imovel-local">📍 Centro</p>
+          <div class="imovel-detalhes">
+            <span>🛏 4 quartos</span>
+            <span>🚿 3 banheiros</span>
+            <span>🚗 2 vagas</span>
+          </div>
+          <div class="imovel-preco">R$ 280.000</div>
+        </div>
+      </div>
+      <div class="imovel-card">
+        <div class="imovel-img" style="background: linear-gradient(135deg, #2563EB20, #F9731620);">
+          <div class="imovel-badge aluguel">Aluguel</div>
+          <div class="imovel-img-placeholder">🏢</div>
+        </div>
+        <div class="imovel-info">
+          <h4>Apartamento — Barbalha</h4>
+          <p class="imovel-local">📍 Bairro Miriam</p>
+          <div class="imovel-detalhes">
+            <span>🛏 2 quartos</span>
+            <span>🚿 1 banheiro</span>
+            <span>🚗 1 vaga</span>
+          </div>
+          <div class="imovel-preco">R$ 800<span>/mês</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="section-footer">
+      <a href="alugar.html" class="btn-outline">Ver todos os imóveis →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRESTADORES EM DESTAQUE -->
+<section class="section bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Prestadores em <em>Destaque</em></h2>
+      <p>Profissionais verificados e bem avaliados no Cariri</p>
+    </div>
+    <div class="prestadores-grid">
+      <div class="prestador-card">
+        <div class="prestador-avatar">⚡</div>
+        <div class="prestador-info">
+          <div class="prestador-top">
+            <h4>Eletricista Profissional</h4>
+            <span class="selo-premium">★ Premium</span>
+          </div>
+          <p class="prestador-cidade">📍 Juazeiro do Norte</p>
+          <p class="prestador-desc">Instalações elétricas residenciais e comerciais, laudos e manutenção preventiva.</p>
+          <div class="prestador-preco">A partir de R$ 80/h</div>
+        </div>
+      </div>
+      <div class="prestador-card">
+        <div class="prestador-avatar">🔧</div>
+        <div class="prestador-info">
+          <div class="prestador-top">
+            <h4>Encanador Especializado</h4>
+            <span class="selo-verificado">✓ Verificado</span>
+          </div>
+          <p class="prestador-cidade">📍 Crato</p>
+          <p class="prestador-desc">Reparos hidráulicos, instalação de banheiros e cozinhas, detecção de vazamentos.</p>
+          <div class="prestador-preco">Consultar orçamento</div>
+        </div>
+      </div>
+      <div class="prestador-card">
+        <div class="prestador-avatar">🏗</div>
+        <div class="prestador-info">
+          <div class="prestador-top">
+            <h4>Arquiteto e Designer</h4>
+            <span class="selo-premium">★ Premium</span>
+          </div>
+          <p class="prestador-cidade">📍 Juazeiro do Norte</p>
+          <p class="prestador-desc">Projetos residenciais, reformas, design de interiores e paisagismo.</p>
+          <div class="prestador-preco">A partir de R$ 150/h</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-footer">
+      <a href="prestadores.html" class="btn-outline">Ver todos os prestadores →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-overlay"></div>
+  <div class="container cta-content">
+    <h2>Multiplique as chances<br>de fechar negócio hoje.</h2>
+    <p>Junte-se a proprietários, corretores e prestadores que já estão no portal que mais cresce no Cariri.</p>
+    <div class="cta-btns">
+      <a href="anunciar.html" class="btn-white">Anunciar Imóvel Agora</a>
+      <a href="planos.html" class="btn-outline-white">Ver Nossos Planos</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+            <rect width="36" height="36" rx="8" fill="#2563EB"/>
+            <path d="M18 8L6 18H10V28H16V22H20V28H26V18H30L18 8Z" fill="white"/>
+            <circle cx="18" cy="11" r="2.5" fill="#F97316"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Portal Araripe</span>
+          <span class="logo-sub">IMÓVEIS & SERVIÇOS</span>
+        </div>
+      </a>
+      <p>Sua plataforma completa para encontrar imóveis e prestadores de serviços na região do Cariri. Do Cariri, para o Cariri.</p>
+      <div class="social-links">
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">ig</a>
+        <a href="#" class="social-btn">in</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h4>Links Rápidos</h4>
+      <a href="index.html">Inicial</a>
+      <a href="alugar.html">Imóveis para Alugar</a>
+      <a href="venda.html">Imóveis para Venda</a>
+      <a href="prestadores.html">Prestadores</a>
+      <a href="planos.html">Planos</a>
+    </div>
+    <div class="footer-links">
+      <h4>Contato</h4>
+      <p>📞 (88) 99999-9999</p>
+      <p>✉️ contato@portalararipe.com.br</p>
+      <p>📍 Juazeiro do Norte, CE</p>
+      <p>🕐 Seg a Sex, 8h às 18h</p>
+    </div>
+    <div class="footer-links">
+      <h4>Cidades Atendidas</h4>
+      <p>Juazeiro do Norte</p>
+      <p>Crato</p>
+      <p>Barbalha</p>
+      <p>Missão Velha</p>
+      <p>Chapada do Araripe</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Portal Araripe. Todos os direitos reservados.</p>
+      <div>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

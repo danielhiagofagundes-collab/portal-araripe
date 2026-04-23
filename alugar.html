@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imóveis para Alugar — Portal Araripe</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-banner">
+  ✦ Lançamento Oficial: <strong>Plano Essencial GRÁTIS por 3 meses!</strong> <a href="planos.html">Ver Planos →</a>
+</div>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#2563EB"/>
+          <path d="M18 8L6 18H10V28H16V22H20V28H26V18H30L18 8Z" fill="white"/>
+          <circle cx="18" cy="11" r="2.5" fill="#F97316"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Portal Araripe</span>
+        <span class="logo-sub">IMÓVEIS & SERVIÇOS</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Inicial</a>
+      <a href="alugar.html" class="nav-link active">Para Alugar</a>
+      <a href="venda.html" class="nav-link">Para Venda</a>
+      <a href="prestadores.html" class="nav-link">Prestadores</a>
+      <a href="planos.html" class="nav-link">Planos</a>
+      <a href="contato.html" class="nav-link">Contato</a>
+    </nav>
+    <a href="anunciar.html" class="btn-primary">Anunciar Agora</a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Inicial</a>
+    <a href="alugar.html">Para Alugar</a>
+    <a href="venda.html">Para Venda</a>
+    <a href="anunciar.html">Anunciar</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Imóveis para <em>Alugar</em></h1>
+    <p>Encontre o imóvel perfeito para alugar na região do Cariri</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filters-bar">
+      <div class="form-group">
+        <label>Cidade</label>
+        <select id="filtro-cidade">
+          <option value="">Todas as cidades</option>
+          <option>Juazeiro do Norte</option>
+          <option>Crato</option>
+          <option>Barbalha</option>
+          <option>Missão Velha</option>
+          <option>Chapada do Araripe</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tipo de Imóvel</label>
+        <select id="filtro-tipo">
+          <option value="">Todos os tipos</option>
+          <option>Casa</option>
+          <option>Apartamento</option>
+          <option>Terreno</option>
+          <option>Comercial</option>
+          <option>Chácara/Sítio</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preço mínimo (R$)</label>
+        <input type="number" id="preco-min" placeholder="R$ 0">
+      </div>
+      <div class="form-group">
+        <label>Preço máximo (R$)</label>
+        <input type="number" id="preco-max" placeholder="R$ 10.000">
+      </div>
+      <button class="btn-search" onclick="filtrar()">🔍 Filtrar</button>
+    </div>
+
+    <div class="empty-state">
+      <div class="empty-icon">🏠</div>
+      <h3>Nenhum imóvel encontrado</h3>
+      <p>Não encontramos imóveis disponíveis ainda. Seja o primeiro a anunciar!</p>
+      <a href="anunciar.html" class="btn-primary" style="display:inline-block; margin-top:20px;">Anunciar meu Imóvel</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Portal Araripe. Todos os direitos reservados.</p>
+      <div><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+function filtrar() {
+  alert('Filtros em breve. Por enquanto, entre em contato para buscar imóveis específicos!');
+}
+</script>
+</body>
+</html>

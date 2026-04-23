@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prestadores de Serviço — Portal Araripe</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-banner">
+  ✦ Lançamento Oficial: <strong>Plano Profissional GRÁTIS por 3 meses!</strong> <a href="planos.html">Ver Planos →</a>
+</div>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#2563EB"/>
+          <path d="M18 8L6 18H10V28H16V22H20V28H26V18H30L18 8Z" fill="white"/>
+          <circle cx="18" cy="11" r="2.5" fill="#F97316"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Portal Araripe</span>
+        <span class="logo-sub">IMÓVEIS & SERVIÇOS</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Inicial</a>
+      <a href="alugar.html" class="nav-link">Para Alugar</a>
+      <a href="venda.html" class="nav-link">Para Venda</a>
+      <a href="prestadores.html" class="nav-link active">Prestadores</a>
+      <a href="planos.html" class="nav-link">Planos</a>
+      <a href="contato.html" class="nav-link">Contato</a>
+    </nav>
+    <a href="cadastro-prestador.html" class="btn-primary">Cadastrar Serviço</a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Inicial</a>
+    <a href="prestadores.html">Prestadores</a>
+    <a href="cadastro-prestador.html">Cadastrar Serviço</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Prestadores de <em>Serviços</em></h1>
+    <p>Conecte-se com profissionais qualificados na região do Cariri</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filters-bar">
+      <div class="form-group">
+        <label>Especialidade</label>
+        <select id="filtro-categoria">
+          <option value="">Todas as especialidades</option>
+          <optgroup label="Manutenção">
+            <option>Eletricista</option>
+            <option>Encanador</option>
+            <option>Pedreiro</option>
+            <option>Pintor</option>
+            <option>Marceneiro</option>
+            <option>Técnico de Ar Condicionado</option>
+          </optgroup>
+          <optgroup label="Projeto e Design">
+            <option>Arquiteto</option>
+            <option>Decorador</option>
+            <option>Paisagista</option>
+          </optgroup>
+          <optgroup label="Limpeza">
+            <option>Faxineira</option>
+            <option>Empresa de Limpeza</option>
+            <option>Dedetizadora</option>
+          </optgroup>
+          <optgroup label="Segurança">
+            <option>Instalador de Câmeras</option>
+            <option>Chaveiro</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Cidade</label>
+        <select id="filtro-cidade">
+          <option value="">Todas as cidades</option>
+          <option>Juazeiro do Norte</option>
+          <option>Crato</option>
+          <option>Barbalha</option>
+          <option>Missão Velha</option>
+          <option>Chapada do Araripe</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Plano</label>
+        <select id="filtro-plano">
+          <option value="">Todos</option>
+          <option value="premium">Premium</option>
+          <option value="profissional">Profissional</option>
+          <option value="gratuito">Gratuito</option>
+        </select>
+      </div>
+      <button class="btn-search" onclick="filtrar()">🔍 Filtrar</button>
+    </div>
+
+    <div class="empty-state">
+      <div class="empty-icon">👷</div>
+      <h3>Nenhum prestador cadastrado ainda</h3>
+      <p>Seja o primeiro a se cadastrar e apareça no topo das buscas!</p>
+      <a href="cadastro-prestador.html" class="btn-primary" style="display:inline-block; margin-top:20px;">Cadastrar meu Serviço</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Portal Araripe. Todos os direitos reservados.</p>
+      <div><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+function filtrar() {
+  // Futuramente integrar com banco de dados
+  alert('Em breve você poderá filtrar prestadores aqui!');
+}
+</script>
+</body>
+</html>

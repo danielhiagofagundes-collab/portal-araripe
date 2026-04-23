@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — Portal Araripe</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-banner">
+  ✦ Lançamento Oficial: <strong>Plano Essencial GRÁTIS por 3 meses!</strong> <a href="planos.html">Ver Planos →</a>
+</div>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#2563EB"/>
+          <path d="M18 8L6 18H10V28H16V22H20V28H26V18H30L18 8Z" fill="white"/>
+          <circle cx="18" cy="11" r="2.5" fill="#F97316"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Portal Araripe</span>
+        <span class="logo-sub">IMÓVEIS & SERVIÇOS</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Inicial</a>
+      <a href="alugar.html" class="nav-link">Para Alugar</a>
+      <a href="venda.html" class="nav-link">Para Venda</a>
+      <a href="prestadores.html" class="nav-link">Prestadores</a>
+      <a href="planos.html" class="nav-link">Planos</a>
+      <a href="contato.html" class="nav-link active">Contato</a>
+    </nav>
+    <a href="anunciar.html" class="btn-primary">Anunciar Agora</a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Inicial</a>
+    <a href="planos.html">Planos</a>
+    <a href="contato.html">Contato</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Entre em <em>contato</em></h1>
+    <p>Estamos aqui para ajudar você a realizar o melhor negócio.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contato-grid">
+      <div>
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <div>
+            <h4>Telefone / WhatsApp</h4>
+            <p>(88) 99999-9999</p>
+            <p style="font-size:12px; color:var(--gray);">Segunda a sexta, 8h às 18h</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <p>contato@portalararipe.com.br</p>
+            <p style="font-size:12px; color:var(--gray);">Respondemos em até 24 horas</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div>
+            <h4>Localização</h4>
+            <p>Juazeiro do Norte, CE</p>
+            <p style="font-size:12px; color:var(--gray);">Região do Cariri</p>
+          </div>
+        </div>
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62736.05!2d-39.3295!3d-7.2131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a175c5c6d5f5b3%3A0x0!2sJuazeiro+do+Norte%2C+CE!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
+            allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:white; border-radius:var(--radius-lg); padding:36px; box-shadow:var(--shadow);">
+          <h2 style="font-family:'Playfair Display',serif; font-size:26px; font-weight:700; margin-bottom:8px;">Envie sua <em>mensagem</em></h2>
+          <p style="color:var(--gray); font-size:14px; margin-bottom:24px;">Preencha o formulário e entraremos em contato em breve.</p>
+          <form id="form-contato" style="display:flex; flex-direction:column; gap:16px;">
+            <div class="form-group">
+              <label>Nome Completo *</label>
+              <input type="text" name="nome" placeholder="Seu nome" required>
+            </div>
+            <div class="form-group">
+              <label>Email *</label>
+              <input type="email" name="email" placeholder="seu@email.com" required>
+            </div>
+            <div class="form-group">
+              <label>WhatsApp</label>
+              <input type="tel" name="telefone" placeholder="(88) 99999-9999">
+            </div>
+            <div class="form-group">
+              <label>Assunto *</label>
+              <select name="assunto" required>
+                <option value="">Selecione</option>
+                <option>Quero anunciar um imóvel</option>
+                <option>Quero me cadastrar como prestador</option>
+                <option>Dúvida sobre planos</option>
+                <option>Suporte técnico</option>
+                <option>Outro assunto</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Mensagem *</label>
+              <textarea name="mensagem" rows="5" placeholder="Escreva sua mensagem aqui..." required style="resize:vertical;"></textarea>
+            </div>
+            <button type="button" class="btn-submit" onclick="enviarContato()">
+              ✉️ Enviar Mensagem
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Portal Araripe. Todos os direitos reservados.</p>
+      <div><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+function enviarContato() {
+  const nome = document.querySelector('[name="nome"]').value;
+  const assunto = document.querySelector('[name="assunto"]').value;
+  const mensagem = document.querySelector('[name="mensagem"]').value;
+  const telefone = document.querySelector('[name="telefone"]').value;
+
+  if (!nome || !assunto || !mensagem) {
+    alert('Por favor, preencha todos os campos obrigatórios.');
+    return;
+  }
+
+  const msg = `Olá! Entrei em contato pelo Portal Araripe.\n\n👤 *Nome:* ${nome}\n📋 *Assunto:* ${assunto}\n📞 *WhatsApp:* ${telefone || 'Não informado'}\n\n💬 *Mensagem:*\n${mensagem}`;
+  window.open(`https://wa.me/5588999999999?text=${encodeURIComponent(msg)}`, '_blank');
+}
+</script>
+</body>
+</html>
