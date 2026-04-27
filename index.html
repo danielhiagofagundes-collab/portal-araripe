@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Araripe — Imóveis & Serviços</title>
+<title>Portal Araripe — Imóveis & Serviços | Do Cariri, Para o Cariri</title>
+<meta name="description" content="Encontre imóveis e prestadores de serviço na região do Cariri cearense. Juazeiro do Norte, Crato, Barbalha e mais.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -16,13 +17,50 @@
     z-index: 2;
     letter-spacing: 0.3px;
   }
+  .whatsapp-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: #25d366;
+    color: white;
+    border-radius: 50px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 999;
+    transition: transform 0.2s;
+  }
+  .whatsapp-float:hover { transform: scale(1.05); }
+  .lancamento-banner {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin: 40px 0;
+  }
+  .lancamento-banner h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #166534;
+    margin-bottom: 10px;
+  }
+  .lancamento-banner p {
+    color: #15803d;
+    margin-bottom: 20px;
+  }
 </style>
 </head>
 <body>
 
 <!-- BANNER TOPO -->
 <div class="top-banner">
-  ✦ Lançamento Oficial: <strong>Plano Profissional GRÁTIS por 3 meses!</strong> <a href="planos.html">Ver Planos →</a>
+  ✦ Lançamento Oficial: <strong>3 meses GRÁTIS em todos os planos pagos!</strong> <a href="planos.html">Ver Planos →</a>
 </div>
 
 <!-- HEADER -->
@@ -77,7 +115,7 @@
         <a href="anunciar.html" class="btn-outline">Anunciar Imóvel</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><strong>5+</strong><span>Cidades</span></div>
+        <div class="stat"><strong>5</strong><span>Cidades</span></div>
         <div class="stat-div"></div>
         <div class="stat"><strong>100%</strong><span>Regional</span></div>
         <div class="stat-div"></div>
@@ -157,58 +195,13 @@
       <h2>Imóveis em <em>Destaque</em></h2>
       <p>Os melhores imóveis da região do Cariri</p>
     </div>
-    <div class="imoveis-grid" id="imoveis-destaque">
-      <div class="imovel-card">
-        <div class="imovel-img" style="background: linear-gradient(135deg, #2563EB20, #F9731620);">
-          <div class="imovel-badge aluguel">Aluguel</div>
-          <div class="imovel-img-placeholder">🏠</div>
-        </div>
-        <div class="imovel-info">
-          <h4>Casa com 3 quartos — Juazeiro do Norte</h4>
-          <p class="imovel-local">📍 Bairro João Pessoa</p>
-          <div class="imovel-detalhes">
-            <span>🛏 3 quartos</span>
-            <span>🚿 2 banheiros</span>
-            <span>🚗 2 vagas</span>
-          </div>
-          <div class="imovel-preco">R$ 1.200<span>/mês</span></div>
-        </div>
-      </div>
-      <div class="imovel-card">
-        <div class="imovel-img" style="background: linear-gradient(135deg, #2563EB20, #F9731620);">
-          <div class="imovel-badge venda">Venda</div>
-          <div class="imovel-img-placeholder">🏡</div>
-        </div>
-        <div class="imovel-info">
-          <h4>Casa ampla — Crato</h4>
-          <p class="imovel-local">📍 Centro</p>
-          <div class="imovel-detalhes">
-            <span>🛏 4 quartos</span>
-            <span>🚿 3 banheiros</span>
-            <span>🚗 2 vagas</span>
-          </div>
-          <div class="imovel-preco">R$ 280.000</div>
-        </div>
-      </div>
-      <div class="imovel-card">
-        <div class="imovel-img" style="background: linear-gradient(135deg, #2563EB20, #F9731620);">
-          <div class="imovel-badge aluguel">Aluguel</div>
-          <div class="imovel-img-placeholder">🏢</div>
-        </div>
-        <div class="imovel-info">
-          <h4>Apartamento — Barbalha</h4>
-          <p class="imovel-local">📍 Bairro Miriam</p>
-          <div class="imovel-detalhes">
-            <span>🛏 2 quartos</span>
-            <span>🚿 1 banheiro</span>
-            <span>🚗 1 vaga</span>
-          </div>
-          <div class="imovel-preco">R$ 800<span>/mês</span></div>
-        </div>
-      </div>
+    <div class="lancamento-banner">
+      <h3>🏠 Estamos no ar!</h3>
+      <p>Seja um dos primeiros a anunciar no portal que vai conectar todo o Cariri. Cadastre seu imóvel agora e ganhe 3 meses grátis!</p>
+      <a href="anunciar.html" class="btn-primary">Anunciar meu Imóvel Grátis</a>
     </div>
     <div class="section-footer">
-      <a href="alugar.html" class="btn-outline">Ver todos os imóveis →</a>
+      <a href="alugar.html" class="btn-outline">Ver imóveis para alugar →</a>
     </div>
   </div>
 </section>
@@ -220,46 +213,40 @@
       <h2>Prestadores em <em>Destaque</em></h2>
       <p>Profissionais verificados e bem avaliados no Cariri</p>
     </div>
-    <div class="prestadores-grid">
-      <div class="prestador-card">
-        <div class="prestador-avatar">⚡</div>
-        <div class="prestador-info">
-          <div class="prestador-top">
-            <h4>Eletricista Profissional</h4>
-            <span class="selo-premium">★ Premium</span>
-          </div>
-          <p class="prestador-cidade">📍 Juazeiro do Norte</p>
-          <p class="prestador-desc">Instalações elétricas residenciais e comerciais, laudos e manutenção preventiva.</p>
-          <div class="prestador-preco">A partir de R$ 80/h</div>
-        </div>
-      </div>
-      <div class="prestador-card">
-        <div class="prestador-avatar">🔧</div>
-        <div class="prestador-info">
-          <div class="prestador-top">
-            <h4>Encanador Especializado</h4>
-            <span class="selo-verificado">✓ Verificado</span>
-          </div>
-          <p class="prestador-cidade">📍 Crato</p>
-          <p class="prestador-desc">Reparos hidráulicos, instalação de banheiros e cozinhas, detecção de vazamentos.</p>
-          <div class="prestador-preco">Consultar orçamento</div>
-        </div>
-      </div>
-      <div class="prestador-card">
-        <div class="prestador-avatar">🏗</div>
-        <div class="prestador-info">
-          <div class="prestador-top">
-            <h4>Arquiteto e Designer</h4>
-            <span class="selo-premium">★ Premium</span>
-          </div>
-          <p class="prestador-cidade">📍 Juazeiro do Norte</p>
-          <p class="prestador-desc">Projetos residenciais, reformas, design de interiores e paisagismo.</p>
-          <div class="prestador-preco">A partir de R$ 150/h</div>
-        </div>
-      </div>
+    <div class="lancamento-banner">
+      <h3>👷 Profissional do Cariri?</h3>
+      <p>Cadastre seus serviços agora e apareça para quem está buscando na sua cidade. Primeiro mês completamente grátis!</p>
+      <a href="cadastro-prestador.html" class="btn-primary">Cadastrar meu Serviço Grátis</a>
     </div>
     <div class="section-footer">
       <a href="prestadores.html" class="btn-outline">Ver todos os prestadores →</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Como <em>Funciona</em></h2>
+      <p>Simples e rápido em 3 passos</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon blue" style="font-size:28px;">1️⃣</div>
+        <h3>Cadastre de graça</h3>
+        <p>Anuncie seu imóvel ou serviço gratuitamente em menos de 5 minutos. Sem complicação.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange" style="font-size:28px;">2️⃣</div>
+        <h3>Apareça pra quem busca</h3>
+        <p>Seu anúncio fica visível para pessoas da sua cidade que estão procurando exatamente o que você oferece.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon blue" style="font-size:28px;">3️⃣</div>
+        <h3>Feche negócio direto</h3>
+        <p>O cliente entra em contato direto com você pelo WhatsApp. Sem intermediários, sem comissão.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -269,7 +256,7 @@
   <div class="cta-overlay"></div>
   <div class="container cta-content">
     <h2>Multiplique as chances<br>de fechar negócio hoje.</h2>
-    <p>Junte-se a proprietários, corretores e prestadores que já estão no portal que mais cresce no Cariri.</p>
+    <p>Faça parte do lançamento da plataforma de imóveis e serviços do Cariri.</p>
     <div class="cta-btns">
       <a href="anunciar.html" class="btn-white">Anunciar Imóvel Agora</a>
       <a href="planos.html" class="btn-outline-white">Ver Nossos Planos</a>
@@ -296,9 +283,8 @@
       </a>
       <p>Sua plataforma completa para encontrar imóveis e prestadores de serviços na região do Cariri. Do Cariri, para o Cariri.</p>
       <div class="social-links">
-        <a href="#" class="social-btn">f</a>
-        <a href="#" class="social-btn">ig</a>
-        <a href="#" class="social-btn">in</a>
+        <a href="https://www.facebook.com/profile.php?id=61588797754382" target="_blank" class="social-btn">f</a>
+        <a href="https://www.instagram.com/portal_araripe/" target="_blank" class="social-btn">ig</a>
       </div>
     </div>
     <div class="footer-links">
@@ -329,12 +315,17 @@
     <div class="container footer-bottom-inner">
       <p>© 2026 Portal Araripe. Todos os direitos reservados.</p>
       <div>
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Termos de Uso</a>
+        <a href="privacidade.html">Política de Privacidade</a>
+        <a href="termos.html">Termos de Uso</a>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- BOTÃO FLUTUANTE WHATSAPP -->
+<a href="https://wa.me/5588994893176" target="_blank" class="whatsapp-float">
+  💬 Falar no WhatsApp
+</a>
 
 <script src="script.js"></script>
 </body>
