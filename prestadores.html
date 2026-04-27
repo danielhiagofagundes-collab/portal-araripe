@@ -6,11 +6,15 @@
 <title>Prestadores de Serviço — Portal Araripe</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  .whatsapp-float { position:fixed; bottom:28px; right:28px; background:#25d366; color:white; border-radius:50px; padding:14px 20px; font-size:15px; font-weight:600; text-decoration:none; display:flex; align-items:center; gap:8px; box-shadow:0 4px 20px rgba(37,211,102,0.4); z-index:999; transition:transform 0.2s; }
+  .whatsapp-float:hover { transform:scale(1.05); }
+</style>
 </head>
 <body>
 
 <div class="top-banner">
-  ✦ Lançamento Oficial: <strong>Plano Profissional GRÁTIS por 3 meses!</strong> <a href="planos.html">Ver Planos →</a>
+  ✦ Lançamento Oficial: <strong>3 meses GRÁTIS em todos os planos pagos!</strong> <a href="planos.html">Ver Planos →</a>
 </div>
 
 <header class="header">
@@ -41,8 +45,12 @@
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Inicial</a>
+    <a href="alugar.html">Para Alugar</a>
+    <a href="venda.html">Para Venda</a>
     <a href="prestadores.html">Prestadores</a>
-    <a href="cadastro-prestador.html">Cadastrar Serviço</a>
+    <a href="planos.html">Planos</a>
+    <a href="contato.html">Contato</a>
+    <a href="cadastro-prestador.html" class="btn-primary">Cadastrar Serviço</a>
   </div>
 </header>
 
@@ -110,25 +118,65 @@
     <div class="empty-state">
       <div class="empty-icon">👷</div>
       <h3>Nenhum prestador cadastrado ainda</h3>
-      <p>Seja o primeiro a se cadastrar e apareça no topo das buscas!</p>
-      <a href="cadastro-prestador.html" class="btn-primary" style="display:inline-block; margin-top:20px;">Cadastrar meu Serviço</a>
+      <p>Seja o primeiro a se cadastrar e apareça no topo das buscas na sua cidade!</p>
+      <a href="cadastro-prestador.html" class="btn-primary" style="display:inline-block; margin-top:20px;">Cadastrar meu Serviço Grátis</a>
     </div>
   </div>
 </section>
 
 <footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+            <rect width="36" height="36" rx="8" fill="#2563EB"/>
+            <path d="M18 8L6 18H10V28H16V22H20V28H26V18H30L18 8Z" fill="white"/>
+            <circle cx="18" cy="11" r="2.5" fill="#F97316"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Portal Araripe</span>
+          <span class="logo-sub">IMÓVEIS & SERVIÇOS</span>
+        </div>
+      </a>
+      <p>Do Cariri, para o Cariri.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Links Rápidos</h4>
+      <a href="index.html">Inicial</a>
+      <a href="alugar.html">Para Alugar</a>
+      <a href="venda.html">Para Venda</a>
+      <a href="prestadores.html">Prestadores</a>
+    </div>
+    <div class="footer-links">
+      <h4>Contato</h4>
+      <p>📞 (88) 99489-3176</p>
+      <p>✉️ contato.portalararipe@hotmail.com</p>
+      <p>📍 Juazeiro do Norte, CE</p>
+    </div>
+    <div class="footer-links">
+      <h4>Cidades</h4>
+      <p>Juazeiro do Norte</p>
+      <p>Crato</p>
+      <p>Barbalha</p>
+      <p>Missão Velha</p>
+      <p>Chapada do Araripe</p>
+    </div>
+  </div>
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
       <p>© 2026 Portal Araripe. Todos os direitos reservados.</p>
-      <div><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+      <div><a href="privacidade.html">Política de Privacidade</a><a href="termos.html">Termos de Uso</a></div>
     </div>
   </div>
 </footer>
 
+<a href="https://wa.me/5588994893176" target="_blank" class="whatsapp-float">💬 Falar no WhatsApp</a>
+
 <script src="script.js"></script>
 <script>
 function filtrar() {
-  // Futuramente integrar com banco de dados
   alert('Em breve você poderá filtrar prestadores aqui!');
 }
 </script>
