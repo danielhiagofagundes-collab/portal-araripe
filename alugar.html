@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -9,6 +10,18 @@
 <style>
   .whatsapp-float { position:fixed; bottom:28px; right:28px; background:#25d366; color:white; border-radius:50px; padding:14px 20px; font-size:15px; font-weight:600; text-decoration:none; display:flex; align-items:center; gap:8px; box-shadow:0 4px 20px rgba(37,211,102,0.4); z-index:999; transition:transform 0.2s; }
   .whatsapp-float:hover { transform:scale(1.05); }
+  .imoveis-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; margin-top:32px; }
+  .imovel-card { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); overflow:hidden; border:1px solid #f0f0f0; transition:box-shadow 0.2s; text-decoration:none; color:inherit; display:flex; flex-direction:column; }
+  .imovel-card:hover { box-shadow:0 6px 24px rgba(37,99,235,0.12); }
+  .imovel-card-img { background:linear-gradient(135deg,#EFF6FF,#DBEAFE); height:160px; display:flex; align-items:center; justify-content:center; font-size:48px; }
+  .imovel-card-body { padding:18px; flex:1; display:flex; flex-direction:column; gap:8px; }
+  .imovel-card-tipo { font-size:12px; font-weight:700; color:#2563EB; text-transform:uppercase; }
+  .imovel-card-titulo { font-size:17px; font-weight:700; color:#1a2f6b; }
+  .imovel-card-local { font-size:13px; color:#666; }
+  .imovel-card-detalhes { display:flex; gap:12px; font-size:13px; color:#555; flex-wrap:wrap; }
+  .imovel-card-preco { font-size:20px; font-weight:800; color:#2563EB; margin-top:auto; padding-top:8px; }
+  .imovel-card-preco small { font-size:13px; font-weight:400; color:#888; }
+  .loading-state { text-align:center; padding:60px 20px; color:#666; font-size:16px; }
 </style>
 </head>
 <body>
@@ -97,12 +110,10 @@
       <button class="btn-search" onclick="filtrar()">🔍 Filtrar</button>
     </div>
 
-    <div class="empty-state">
-      <div class="empty-icon">🏠</div>
-      <h3>Nenhum imóvel para alugar ainda</h3>
-      <p>Seja o primeiro a anunciar e alcance quem está buscando na sua cidade!</p>
-      <a href="anunciar.html" class="btn-primary" style="display:inline-block; margin-top:20px;">Anunciar meu Imóvel Grátis</a>
-    </div>
+```
+<div id="lista-imoveis" class="loading-state">⏳ Carregando imóveis...</div>
+```
+
   </div>
 </section>
 
@@ -157,10 +168,76 @@
 <a href="https://wa.me/5588994893176" target="_blank" class="whatsapp-float">💬 Falar no WhatsApp</a>
 
 <script src="script.js"></script>
+
 <script>
-function filtrar() {
-  alert('Filtros em breve. Por enquanto, entre em contato para buscar imóveis específicos!');
+const SUPABASE_URL = 'https://vyuqjpdgrzdndpuxctsv.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_wpb5wIruSE-lsNO2ZqZkNQ_dDSBC6GJ';
+
+let todosImoveis = [];
+
+const icones = { 'Casa':'🏠', 'Apartamento':'🏢', 'Terreno':'🌿', 'Comercial':'🏪', 'Chácara/Sítio':'🌳' };
+
+async function carregarImoveis() {
+  const lista = document.getElementById('lista-imoveis');
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/imoveis?status=eq.ativo&tipo_anuncio=eq.aluguel&order=created_at.desc`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    todosImoveis = await response.json();
+    renderizar(todosImoveis);
+  } catch (err) {
+    lista.innerHTML = '<p style="text-align:center;color:#ef4444;">Erro ao carregar imóveis. Tente novamente.</p>';
+  }
 }
+
+function renderizar(imoveis) {
+  const lista = document.getElementById('lista-imoveis');
+  if (!imoveis || imoveis.length === 0) {
+    lista.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🏠</div>
+        <h3>Nenhum imóvel para alugar ainda</h3>
+        <p>Seja o primeiro a anunciar e alcance quem está buscando na sua cidade!</p>
+        <a href="anunciar.html" class="btn-primary" style="display:inline-block;margin-top:20px;">Anunciar meu Imóvel Grátis</a>
+      </div>`;
+    return;
+  }
+
+  lista.innerHTML = `<div class="imoveis-grid">${imoveis.map(p => `
+    <a href="imovel-detalhe.html?id=${p.id}&origem=alugar.html" class="imovel-card">
+      <div class="imovel-card-img">${icones[p.tipo_imovel] || '🏠'}</div>
+      <div class="imovel-card-body">
+        <div class="imovel-card-tipo">${p.tipo_imovel}</div>
+        <div class="imovel-card-titulo">${p.titulo}</div>
+        <div class="imovel-card-local">📍 ${p.bairro}, ${p.cidade}</div>
+        <div class="imovel-card-detalhes">
+          ${p.metragem ? `<span>📐 ${p.metragem}m²</span>` : ''}
+          ${p.quartos ? `<span>🛏️ ${p.quartos} quartos</span>` : ''}
+          ${p.banheiros ? `<span>🚿 ${p.banheiros} banheiros</span>` : ''}
+        </div>
+        <div class="imovel-card-preco">R$ ${parseFloat(p.valor).toLocaleString('pt-BR',{minimumFractionDigits:2})} <small>/mês</small></div>
+      </div>
+    </a>
+  `).join('')}</div>`;
+}
+
+function filtrar() {
+  const cidade = document.getElementById('filtro-cidade').value;
+  const tipo = document.getElementById('filtro-tipo').value;
+  const min = parseFloat(document.getElementById('preco-min').value) || 0;
+  const max = parseFloat(document.getElementById('preco-max').value) || Infinity;
+
+  const filtrados = todosImoveis.filter(p =>
+    (!cidade || p.cidade === cidade) &&
+    (!tipo || p.tipo_imovel === tipo) &&
+    parseFloat(p.valor) >= min &&
+    parseFloat(p.valor) <= max
+  );
+  renderizar(filtrados);
+}
+
+carregarImoveis();
 </script>
+
 </body>
 </html>
