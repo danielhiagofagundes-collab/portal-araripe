@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste Prestador</title>
+</head>
+<body style="font-family:sans-serif; padding:20px;">
+
+<h2>Teste de carregamento</h2>
+<div id="log" style="background:#f0f0f0; padding:16px; border-radius:8px; white-space:pre-wrap; font-size:13px;"></div>
+
+<script>
+var SUPABASE_URL = 'https://vyuqjpdgrzdndpuxctsv.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_wpb5wIruSE-lsNO2ZqZkNQ_dDSBC6GJ';
+
+function log(msg) {
+  document.getElementById('log').textContent += msg + '
+';
+}
+
+async function testar() {
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  log('ID da URL: ' + (id || 'NENHUM'));
+
+  if (!id) {
+    log('Usando ID de teste fixo...');
+    id = 'b68c6d0b-7b99-49b8-acbd-3a1d5c374159';
+  }
+
+  log('Buscando prestador...');
+  var url = SUPABASE_URL + '/rest/v1/prestadores?id=eq.' + id;
+  log('URL: ' + url);
+
+  try {
+    var response = await fetch(url, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY
+      }
+    });
+    log('Status HTTP: ' + response.status);
+    var texto = await response.text();
+    log('Resposta: ' + texto.substring(0, 500));
+  } catch (err) {
+    log('ERRO: ' + err.message);
+  }
+}
+
+testar();
+</script>
+</body>
+</html>
