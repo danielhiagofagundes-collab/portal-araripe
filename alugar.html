@@ -75,36 +75,20 @@
 <section class="section">
   <div class="container">
     <div class="filters-bar">
-      <div class="form-group">
-        <label>Cidade</label>
+      <div class="form-group"><label>Cidade</label>
         <select id="filtro-cidade">
           <option value="">Todas as cidades</option>
-          <option>Juazeiro do Norte</option>
-          <option>Crato</option>
-          <option>Barbalha</option>
-          <option>Missao Velha</option>
-          <option>Chapada do Araripe</option>
+          <option>Juazeiro do Norte</option><option>Crato</option><option>Barbalha</option><option>Missao Velha</option><option>Chapada do Araripe</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Tipo de Imovel</label>
+      <div class="form-group"><label>Tipo de Imovel</label>
         <select id="filtro-tipo">
           <option value="">Todos os tipos</option>
-          <option>Casa</option>
-          <option>Apartamento</option>
-          <option>Terreno</option>
-          <option>Comercial</option>
-          <option>Chacara/Sitio</option>
+          <option>Casa</option><option>Apartamento</option><option>Terreno</option><option>Comercial</option><option>Chacara/Sitio</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Preco minimo (R$)</label>
-        <input type="number" id="preco-min" placeholder="R$ 0">
-      </div>
-      <div class="form-group">
-        <label>Preco maximo (R$)</label>
-        <input type="number" id="preco-max" placeholder="R$ 10.000">
-      </div>
+      <div class="form-group"><label>Preco minimo (R$)</label><input type="number" id="preco-min" placeholder="R$ 0"></div>
+      <div class="form-group"><label>Preco maximo (R$)</label><input type="number" id="preco-max" placeholder="R$ 10.000"></div>
       <button class="btn-search" onclick="filtrar()">Filtrar</button>
     </div>
     <div id="lista-imoveis" class="loading-state">Carregando imoveis...</div>
@@ -124,12 +108,7 @@
     <div class="footer-links"><h4>Contato</h4><p>(88) 99489-3176</p><p>contato.portalararipe@hotmail.com</p><p>Juazeiro do Norte, CE</p></div>
     <div class="footer-links"><h4>Cidades</h4><p>Juazeiro do Norte</p><p>Crato</p><p>Barbalha</p><p>Missao Velha</p><p>Chapada do Araripe</p></div>
   </div>
-  <div class="footer-bottom">
-    <div class="container footer-bottom-inner">
-      <p>2026 Portal Araripe. Todos os direitos reservados.</p>
-      <div><a href="privacidade.html">Politica de Privacidade</a><a href="termos.html">Termos de Uso</a></div>
-    </div>
-  </div>
+  <div class="footer-bottom"><div class="container footer-bottom-inner"><p>2026 Portal Araripe. Todos os direitos reservados.</p><div><a href="privacidade.html">Politica de Privacidade</a><a href="termos.html">Termos de Uso</a></div></div></div>
 </footer>
 
 <a href="https://wa.me/5588994893176" target="_blank" class="whatsapp-float">Falar no WhatsApp</a>
@@ -140,10 +119,7 @@ var SUPABASE_KEY = 'sb_publishable_wpb5wIruSE-lsNO2ZqZkNQ_dDSBC6GJ';
 var todosImoveis = [];
 var icones = { 'Casa':'&#127968;', 'Apartamento':'&#127970;', 'Terreno':'&#127807;', 'Comercial':'&#127978;', 'Chacara/Sitio':'&#127795;' };
 
-function toggleMenu() {
-  var menu = document.getElementById('mobileMenu');
-  if (menu) menu.classList.toggle('open');
-}
+function toggleMenu() { var menu = document.getElementById('mobileMenu'); if (menu) menu.classList.toggle('open'); }
 
 async function carregarImoveis() {
   var lista = document.getElementById('lista-imoveis');
@@ -153,9 +129,7 @@ async function carregarImoveis() {
     });
     todosImoveis = await response.json();
     renderizar(todosImoveis);
-  } catch (err) {
-    lista.innerHTML = '<p style="text-align:center;color:#ef4444;">Erro ao carregar. Tente novamente.</p>';
-  }
+  } catch (err) { lista.innerHTML = '<p style="text-align:center;color:#ef4444;">Erro ao carregar. Tente novamente.</p>'; }
 }
 
 function renderizar(imoveis) {
@@ -198,4 +172,4 @@ function filtrar() {
 carregarImoveis();
 </script>
 </body>
-</html>
+  </html>
