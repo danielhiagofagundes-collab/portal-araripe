@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prestadores de Servico - Portal Araripe</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .whatsapp-float { position:fixed; bottom:28px; right:28px; background:#25d366; color:white; border-radius:50px; padding:14px 20px; font-size:15px; font-weight:600; text-decoration:none; display:flex; align-items:center; gap:8px; box-shadow:0 4px 20px rgba(37,211,102,0.4); z-index:999; transition:transform 0.2s; }
+  .whatsapp-float:hover { transform:scale(1.05); }
+  .prestadores-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:24px; margin-top:32px; }
+  .prestador-card { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); overflow:hidden; border:1px solid #f0f0f0; transition:box-shadow 0.2s; text-decoration:none; color:inherit; display:flex; flex-direction:column; }
+  .prestador-card:hover { box-shadow:0 6px 24px rgba(37,99,235,0.12); }
+  .prestador-foto { width:100%; height:180px; object-fit:cover; background:#f0f4ff; display:flex; align-items:center; justify-content:center; font-size:48px; }
+  .prestador-foto img { width:100%; height:180px; object-fit:cover; }
+  .prestador-body { padding:20px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .badge-plano { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; text-transform:uppercase; width:fit-content; }
+  .badge-plano.premium { background:#FEF3C7; color:#92400E; }
+  .badge-plano.profissional { background:#EFF6FF; color:#1D4ED8; }
+  .badge-plano.gratuito { background:#F0FDF4; color:#166534; }
+  .prestador-card h3 { font-size:17px; font-weight:700; color:#1a2f6b; margin:0; }
+  .prestador-categoria { font-size:14px; color:#F97316; font-weight:600; }
+  .prestador-descricao { font-size:13px; color:#555; line-height:1.6; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .prestador-info { display:flex; flex-wrap:wrap; gap:8px; font-size:13px; color:#666; }
+  .prestador-valor { font-size:14px; font-weight:600; color:#2563EB; }
+  .btn-ver-mais { display:inline-flex; align-items:center; justify-content:center; background:#2563EB; color:white; padding:10px 16px; border-radius:8px; font-weight:600; font-size:14px; margin-top:auto; transition:background 0.2s; }
+  .btn-ver-mais:hover { background:#1d4ed8; }
+  .loading-state { text-align:center; padding:60px 20px; color:#666; font-size:16px; }
+</style>
+</head>
+<body>
+
+<div class="top-banner">
+  Lancamento Oficial: <strong>3 meses GRATIS em todos os planos pagos!</strong> <a href="planos.html">Ver Planos</a>
+</div>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#2563EB"/>
+          <path d="M18 8L6 18H10V28H16V22H20V28H26V18H30L18 8Z" fill="white"/>
+          <circle cx="18" cy="11" r="2.5" fill="#F97316"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Portal Araripe</span>
+        <span class="logo-sub">IMOVEIS &amp; SERVICOS</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Inicial</a>
+      <a href="alugar.html" class="nav-link">Para Alugar</a>
+      <a href="venda.html" class="nav-link">Para Venda</a>
+      <a href="prestadores.html" class="nav-link active">Prestadores</a>
+      <a href="planos.html" class="nav-link">Planos</a>
+      <a href="contato.html" class="nav-link">Contato</a>
+    </nav>
+    <a href="cadastro-prestador.html" class="btn-primary">Cadastrar Servico</a>
+    <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Inicial</a>
+    <a href="alugar.html">Para Alugar</a>
+    <a href="venda.html">Para Venda</a>
+    <a href="prestadores.html">Prestadores</a>
+    <a href="planos.html">Planos</a>
+    <a href="contato.html">Contato</a>
+    <a href="cadastro-prestador.html" class="btn-primary">Cadastrar Servico</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Prestadores de <em>Servicos</em></h1>
+    <p>Conecte-se com profissionais qualificados na regiao do Cariri</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filters-bar">
+      <div class="form-group">
+        <label>Especialidade</label>
+        <select id="filtro-categoria">
+          <option value="">Todas as especialidades</option>
+          <optgroup label="Manutencao">
+            <option>Eletricista</option>
+            <option>Encanador / Hidraulico</option>
+            <option>Pedreiro / Construcao</option>
+            <option>Pintor</option>
+            <option>Marceneiro</option>
+            <option>Tecnico de Ar Condicionado</option>
+          </optgroup>
+          <optgroup label="Limpeza">
+            <option>Faxineira / Diarista</option>
+            <option>Empresa de Limpeza</option>
+            <option>Dedetizadora / Desinsetizadora</option>
+          </optgroup>
+          <optgroup label="Projeto">
+            <option>Arquiteto</option>
+            <option>Decorador de Interiores</option>
+            <option>Paisagista</option>
+          </optgroup>
+          <optgroup label="Seguranca">
+            <option>Instalador de Cameras / CFTV</option>
+            <option>Chaveiro</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Cidade</label>
+        <select id="filtro-cidade">
+          <option value="">Todas as cidades</option>
+          <option>Juazeiro do Norte</option>
+          <option>Crato</option>
+          <option>Barbalha</option>
+          <option>Missao Velha</option>
+          <option>Chapada do Araripe</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Plano</label>
+        <select id="filtro-plano">
+          <option value="">Todos</option>
+          <option value="premium">Premium</option>
+          <option value="profissional">Profissional</option>
+          <option value="gratuito">Gratuito</option>
+        </select>
+      </div>
+      <button class="btn-search" onclick="filtrar()">Filtrar</button>
+    </div>
+
+    <div id="lista-prestadores" class="loading-state">Carregando prestadores...</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+            <rect width="36" height="36" rx="8" fill="#2563EB"/>
+            <path d="M18 8L6 18H10V28H16V22H20V28H26V18H30L18 8Z" fill="white"/>
+            <circle cx="18" cy="11" r="2.5" fill="#F97316"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Portal Araripe</span>
+          <span class="logo-sub">IMOVEIS &amp; SERVICOS</span>
+        </div>
+      </a>
+      <p>Do Cariri, para o Cariri.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Links Rapidos</h4>
+      <a href="index.html">Inicial</a>
+      <a href="alugar.html">Para Alugar</a>
+      <a href="venda.html">Para Venda</a>
+      <a href="prestadores.html">Prestadores</a>
+    </div>
+    <div class="footer-links">
+      <h4>Contato</h4>
+      <p>(88) 99489-3176</p>
+      <p>contato.portalararipe@hotmail.com</p>
+      <p>Juazeiro do Norte, CE</p>
+    </div>
+    <div class="footer-links">
+      <h4>Cidades</h4>
+      <p>Juazeiro do Norte</p>
+      <p>Crato</p>
+      <p>Barbalha</p>
+      <p>Missao Velha</p>
+      <p>Chapada do Araripe</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>2026 Portal Araripe. Todos os direitos reservados.</p>
+      <div><a href="privacidade.html">Politica de Privacidade</a><a href="termos.html">Termos de Uso</a></div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5588994893176" target="_blank" class="whatsapp-float">Falar no WhatsApp</a>
+
+<script>
+var SUPABASE_URL = 'https://vyuqjpdgrzdndpuxctsv.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_wpb5wIruSE-lsNO2ZqZkNQ_dDSBC6GJ';
+var todosPrestadores = [];
+
+function toggleMenu() {
+  var menu = document.getElementById('mobileMenu');
+  if (menu) menu.classList.toggle('open');
+}
+
+async function carregarPrestadores() {
+  var lista = document.getElementById('lista-prestadores');
+  try {
+    var response = await fetch(SUPABASE_URL + '/rest/v1/prestadores?status=eq.ativo&order=plano.asc,created_at.desc', {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY
+      }
+    });
+    var dados = await response.json();
+    todosPrestadores = dados;
+    renderizar(dados);
+  } catch (err) {
+    lista.innerHTML = '<p style="text-align:center;color:#ef4444;">Erro ao carregar prestadores. Tente novamente.</p>';
+  }
+}
+
+function renderizar(prestadores) {
+  var lista = document.getElementById('lista-prestadores');
+  if (!prestadores || prestadores.length === 0) {
+    lista.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128119;</div><h3>Nenhum prestador encontrado</h3><p>Seja o primeiro a se cadastrar!</p><a href="cadastro-prestador.html" class="btn-primary" style="display:inline-block;margin-top:20px;">Cadastrar meu Servico Gratis</a></div>';
+    return;
+  }
+
+  var cards = prestadores.map(function(p) {
+    var plano = p.plano || 'gratuito';
+    var descricao = p.descricao || p.especialidades || '';
+    var valor = p.valor_minimo ? 'A partir de R$ ' + parseFloat(p.valor_minimo).toFixed(2).replace('.', ',') : '';
+    var orcamento = p.orcamento_gratis === 'sim' ? '<span>Orcamento gratis</span>' : '';
+    var experiencia = p.experiencia ? '<span>' + p.experiencia + '</span>' : '';
+
+    var fotoHtml = '';
+    if (p.foto_url) {
+      fotoHtml = '<div class="prestador-foto"><img src="' + p.foto_url + '" alt="Foto de ' + p.nome + '" onerror="this.parentElement.innerHTML=\'&#128119;\'"></div>';
+    } else {
+      fotoHtml = '<div class="prestador-foto" style="display:flex;align-items:center;justify-content:center;">&#128119;</div>';
+    }
+
+    return '<a href="prestador-detalhe.html?id=' + p.id + '" class="prestador-card">'
+      + fotoHtml
+      + '<div class="prestador-body">'
+      + '<span class="badge-plano ' + plano + '">' + plano + '</span>'
+      + '<h3>' + p.nome + '</h3>'
+      + '<div class="prestador-categoria">' + p.categoria + '</div>'
+      + (descricao ? '<div class="prestador-descricao">' + descricao + '</div>' : '')
+      + '<div class="prestador-info"><span>' + p.cidade + '</span>' + experiencia + orcamento + '</div>'
+      + (valor ? '<div class="prestador-valor">' + valor + '</div>' : '')
+      + '<div class="btn-ver-mais">Ver Perfil Completo</div>'
+      + '</div>'
+      + '</a>';
+  }).join('');
+
+  lista.innerHTML = '<div class="prestadores-grid">' + cards + '</div>';
+}
+
+function filtrar() {
+  var categoria = document.getElementById('filtro-categoria').value;
+  var cidade = document.getElementById('filtro-cidade').value;
+  var plano = document.getElementById('filtro-plano').value;
+
+  var filtrados = todosPrestadores.filter(function(p) {
+    return (!categoria || p.categoria === categoria) &&
+           (!cidade || p.cidade === cidade) &&
+           (!plano || p.plano === plano);
+  });
+
+  renderizar(filtrados);
+}
+
+carregarPrestadores();
+</script>
+
+</body>
+</html>
