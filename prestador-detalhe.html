@@ -102,10 +102,12 @@ function getParam(nome) {
 async function carregarPrestador() {
   var id = getParam('id');
   var conteudo = document.getElementById('conteudo');
+
   if (!id) {
     conteudo.innerHTML = '<p style="text-align:center;color:#ef4444;">Prestador nao encontrado.</p><a href="prestadores.html" style="color:#2563EB;">Voltar</a>';
     return;
   }
+
   try {
     var url = SUPABASE_URL + '/rest/v1/prestadores?id=eq.' + id;
     var response = await fetch(url, {
@@ -113,15 +115,24 @@ async function carregarPrestador() {
     });
     var dados = await response.json();
     var p = dados[0];
+
     if (!p) {
       conteudo.innerHTML = '<p style="text-align:center;color:#ef4444;">Prestador nao encontrado.</p><a href="prestadores.html" style="color:#2563EB;">Voltar</a>';
       return;
     }
+
     document.title = p.nome + ' - Portal Araripe';
+
     var plano = p.plano || 'gratuito';
-    var fotoHtml = p.foto_url ? '<img src="' + p.foto_url + '" alt="Foto" class="foto-principal" onerror="this.style.display='none'">' : '';
+
+    var fotoHtml = '';
+    if (p.foto_url) {
+      fotoHtml = '<img src="' + p.foto_url + '" alt="Foto" class="foto-principal" onerror="this.remove()">';
+    }
+
     var instagramBtn = p.instagram ? '<a href="' + p.instagram + '" target="_blank" class="btn-insta">Ver Instagram</a>' : '';
-    var telefone = p.telefone ? p.telefone.replace(/D/g, '') : '';
+    var telefone = p.telefone ? p.telefone.replace(/\D/g, '') : '';
+
     var html = '<a href="prestadores.html" class="voltar">Voltar para Prestadores</a>'
       + fotoHtml
       + '<span class="badge-plano ' + plano + '">Plano ' + plano + '</span>'
@@ -135,13 +146,17 @@ async function carregarPrestador() {
       + (p.valor_minimo ? '<div class="detalhe-item"><label>Valor Minimo</label><span>R$ ' + parseFloat(p.valor_minimo).toFixed(2).replace('.', ',') + '</span></div>' : '')
       + '<div class="detalhe-item"><label>Orcamento Gratis</label><span>' + (p.orcamento_gratis === 'sim' ? 'Sim' : 'Nao') + '</span></div>'
       + '</div>';
+
     if (p.descricao) html += '<div class="detalhe-secao"><h3>Sobre o Prestador</h3><p>' + p.descricao + '</p></div>';
     if (p.especialidades) html += '<div class="detalhe-secao"><h3>Especialidades e Servicos</h3><p>' + p.especialidades + '</p></div>';
+
     html += '<div class="contato-box"><h3>Quer contratar este servico?</h3>'
       + '<p>Entre em contato direto pelo WhatsApp' + (p.instagram ? ' ou veja o Instagram:' : ':') + '</p>'
       + '<div class="contato-btns"><a href="https://wa.me/55' + telefone + '" target="_blank" class="btn-wpp">Chamar no WhatsApp</a>'
       + instagramBtn + '</div></div>';
+
     conteudo.innerHTML = html;
+
   } catch (err) {
     conteudo.innerHTML = '<p style="text-align:center;color:#ef4444;">Erro ao carregar. Tente novamente.</p><br><a href="prestadores.html" style="color:#2563EB;">Voltar</a>';
   }
@@ -149,6 +164,5 @@ async function carregarPrestador() {
 
 carregarPrestador();
 </script>
-
 </body>
 </html>
