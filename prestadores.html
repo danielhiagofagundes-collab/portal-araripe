@@ -71,6 +71,7 @@
     <a href="cadastro-prestador.html" class="btn-primary">Cadastrar Servico</a>
   </div>
 </header>
+
 <section class="page-hero">
   <div class="container">
     <h1>Prestadores de <em>Servicos</em></h1>
@@ -131,6 +132,7 @@
       </div>
       <button class="btn-search" onclick="filtrar()">Filtrar</button>
     </div>
+
     <div id="lista-prestadores" class="loading-state">Carregando prestadores...</div>
   </div>
 </section>
@@ -199,7 +201,10 @@ async function carregarPrestadores() {
   var lista = document.getElementById('lista-prestadores');
   try {
     var response = await fetch(SUPABASE_URL + '/rest/v1/prestadores?status=eq.ativo&order=plano.asc,created_at.desc', {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY
+      }
     });
     var dados = await response.json();
     todosPrestadores = dados;
@@ -215,25 +220,35 @@ function renderizar(prestadores) {
     lista.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128119;</div><h3>Nenhum prestador encontrado</h3><p>Seja o primeiro a se cadastrar!</p><a href="cadastro-prestador.html" class="btn-primary" style="display:inline-block;margin-top:20px;">Cadastrar meu Servico Gratis</a></div>';
     return;
   }
+
   var cards = prestadores.map(function(p) {
     var plano = p.plano || 'gratuito';
     var descricao = p.descricao || p.especialidades || '';
     var valor = p.valor_minimo ? 'A partir de R$ ' + parseFloat(p.valor_minimo).toFixed(2).replace('.', ',') : '';
     var orcamento = p.orcamento_gratis === 'sim' ? '<span>Orcamento gratis</span>' : '';
     var experiencia = p.experiencia ? '<span>' + p.experiencia + '</span>' : '';
-    var fotoHtml = p.foto_url
-      ? '<div class="prestador-foto"><img src="' + p.foto_url + '" alt="Foto de ' + p.nome + '" onerror="this.parentElement.innerHTML='&#128119;'"></div>'
-      : '<div class="prestador-foto" style="display:flex;align-items:center;justify-content:center;">&#128119;</div>';
+
+    var fotoHtml = '';
+    if (p.foto_url) {
+      fotoHtml = '<div class="prestador-foto"><img src="' + p.foto_url + '" alt="Foto de ' + p.nome + '" onerror="this.parentNode.removeChild(this)"></div>';
+    } else {
+      fotoHtml = '<div class="prestador-foto" style="display:flex;align-items:center;justify-content:center;">&#128119;</div>';
+    }
+
     return '<a href="prestador-detalhe.html?id=' + p.id + '" class="prestador-card">'
-      + fotoHtml + '<div class="prestador-body">'
+      + fotoHtml
+      + '<div class="prestador-body">'
       + '<span class="badge-plano ' + plano + '">' + plano + '</span>'
       + '<h3>' + p.nome + '</h3>'
       + '<div class="prestador-categoria">' + p.categoria + '</div>'
       + (descricao ? '<div class="prestador-descricao">' + descricao + '</div>' : '')
       + '<div class="prestador-info"><span>' + p.cidade + '</span>' + experiencia + orcamento + '</div>'
       + (valor ? '<div class="prestador-valor">' + valor + '</div>' : '')
-      + '<div class="btn-ver-mais">Ver Perfil Completo</div></div></a>';
+      + '<div class="btn-ver-mais">Ver Perfil Completo</div>'
+      + '</div>'
+      + '</a>';
   }).join('');
+
   lista.innerHTML = '<div class="prestadores-grid">' + cards + '</div>';
 }
 
@@ -241,9 +256,13 @@ function filtrar() {
   var categoria = document.getElementById('filtro-categoria').value;
   var cidade = document.getElementById('filtro-cidade').value;
   var plano = document.getElementById('filtro-plano').value;
+
   var filtrados = todosPrestadores.filter(function(p) {
-    return (!categoria || p.categoria === categoria) && (!cidade || p.cidade === cidade) && (!plano || p.plano === plano);
+    return (!categoria || p.categoria === categoria) &&
+           (!cidade || p.cidade === cidade) &&
+           (!plano || p.plano === plano);
   });
+
   renderizar(filtrados);
 }
 
@@ -251,4 +270,4 @@ carregarPrestadores();
 </script>
 
 </body>
-</html>
+        </html> 
