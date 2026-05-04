@@ -16,6 +16,23 @@ async function salvarNoSupabase(tabela, dados) {
   return response.ok;
 }
 
+// ===== UPLOAD DE FOTO PARA SUPABASE STORAGE =====
+async function uploadFotoSupabase(arquivo) {
+  var ext = arquivo.name.split('.').pop().toLowerCase();
+  var nomeArquivo = Date.now() + '_' + Math.random().toString(36).substring(2, 8) + '.' + ext;
+  var response = await fetch(SUPABASE_URL + '/storage/v1/object/prestadores/' + nomeArquivo, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': arquivo.type
+    },
+    body: arquivo
+  });
+  if (!response.ok) return null;
+  return SUPABASE_URL + '/storage/v1/object/public/prestadores/' + nomeArquivo;
+}
+
 // ===== MENU MOBILE =====
 function toggleMenu() {
   var menu = document.getElementById('mobileMenu');
@@ -28,12 +45,7 @@ function buscar() {
   var cidade = document.getElementById('cidade-busca') ? document.getElementById('cidade-busca').value : '';
   var tipoImovel = document.getElementById('tipo-imovel') ? document.getElementById('tipo-imovel').value : '';
   var preco = document.getElementById('preco-max') ? document.getElementById('preco-max').value : '';
-
-  if (tipo === 'servico') {
-    window.location.href = 'prestadores.html';
-    return;
-  }
-
+  if (tipo === 'servico') { window.location.href = 'prestadores.html'; return; }
   var url = 'alugar.html?';
   if (cidade) url += 'cidade=' + encodeURIComponent(cidade) + '&';
   if (tipoImovel) url += 'tipo=' + encodeURIComponent(tipoImovel) + '&';
@@ -55,7 +67,6 @@ function setupRadios() {
       }
       btn.classList.add('selected');
       if (input) input.checked = true;
-
       if (input && input.name === 'tipo_anuncio') {
         var aluguelFields = document.getElementById('campos-aluguel');
         if (aluguelFields) {
@@ -83,9 +94,11 @@ function setupUpload(inputId, areaId, countId, minFotos) {
   var area = document.getElementById(areaId);
   var count = document.getElementById(countId);
   if (!input || !area) return;
-
   area.addEventListener('click', function() { input.click(); });
-  area.addEventListener('dragover', function(e) { e.preventDefault(); area.style.borderColor = '#2563EB'; });
+  area.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    area.style.borderColor = '#2563EB';
+  });
   area.addEventListener('dragleave', function() { area.style.borderColor = ''; });
   area.addEventListener('drop', function(e) {
     e.preventDefault();
@@ -94,7 +107,6 @@ function setupUpload(inputId, areaId, countId, minFotos) {
     updateCount();
   });
   input.addEventListener('change', updateCount);
-
   function updateCount() {
     var n = input.files ? input.files.length : 0;
     if (count) {
@@ -108,12 +120,10 @@ function setupUpload(inputId, areaId, countId, minFotos) {
 function updateProgress() {
   var form = document.getElementById('form-anuncio') || document.getElementById('form-prestador');
   if (!form) return;
-
   var required = form.querySelectorAll('[required]');
   var filled = 0;
   required.forEach(function(f) { if (f.value.trim() !== '') filled++; });
   var pct = Math.round((filled / required.length) * 100);
-
   var bar = document.getElementById('progress-bar');
   var label = document.getElementById('progress-label');
   if (bar) bar.style.width = pct + '%';
@@ -127,14 +137,9 @@ async function validarEnviar(formId) {
 
   var required = form.querySelectorAll('[required]');
   var ok = true;
-
   required.forEach(function(f) {
-    if (!f.value.trim()) {
-      f.style.borderColor = '#ef4444';
-      ok = false;
-    } else {
-      f.style.borderColor = '';
-    }
+    if (!f.value.trim()) { f.style.borderColor = '#ef4444'; ok = false; }
+    else { f.style.borderColor = ''; }
   });
 
   var alertEl = document.getElementById('form-alert');
@@ -143,7 +148,6 @@ async function validarEnviar(formId) {
     window.scrollTo({ top: alertEl ? alertEl.offsetTop - 100 : 0, behavior: 'smooth' });
     return;
   }
-
   if (alertEl) alertEl.style.display = 'none';
 
   var btn = form.querySelector('.btn-submit');
@@ -179,7 +183,6 @@ async function validarEnviar(formId) {
         tipo_anunciante: val('[name="tipo_anunciante"]:checked'),
         status: 'ativo'
       };
-
       var sucesso = await salvarNoSupabase('imoveis', dados);
       if (sucesso) {
         if (btn) btn.textContent = 'Enviado com sucesso!';
@@ -188,11 +191,17 @@ async function validarEnviar(formId) {
         updateProgress();
         var msg = 'Novo anuncio no Portal Araripe! Nome: ' + dados.nome + ' Telefone: ' + dados.telefone + ' Imovel: ' + dados.titulo + ' Cidade: ' + dados.cidade + ' Valor: R$ ' + dados.valor;
         window.open('https://wa.me/5588994893176?text=' + encodeURIComponent(msg), '_blank');
-      } else {
-        throw new Error('Erro ao salvar');
-      }
+      } else { throw new Error('Erro ao salvar'); }
 
     } else if (formId === 'form-prestador') {
+      // Faz upload da foto se o usuario selecionou alguma
+      var fotoInput = document.getElementById('fotos-prestador');
+      var fotoUrl = null;
+      if (fotoInput && fotoInput.files && fotoInput.files.length > 0) {
+        if (btn) btn.textContent = 'Enviando foto...';
+        fotoUrl = await uploadFotoSupabase(fotoInput.files[0]);
+      }
+
       var dados = {
         nome: val('[name="nome"]'),
         tipo_cadastro: val('[name="tipo_cadastro"]:checked'),
@@ -210,9 +219,11 @@ async function validarEnviar(formId) {
         orcamento_gratis: val('[name="orcamento_gratis"]:checked'),
         instagram: val('[name="instagram"]'),
         plano: val('[name="plano"]:checked'),
+        foto_url: fotoUrl,
         status: 'ativo'
       };
 
+      if (btn) btn.textContent = 'Salvando cadastro...';
       var sucesso = await salvarNoSupabase('prestadores', dados);
       if (sucesso) {
         if (btn) btn.textContent = 'Enviado com sucesso!';
@@ -221,11 +232,8 @@ async function validarEnviar(formId) {
         updateProgress();
         var msg = 'Novo prestador no Portal Araripe! Nome: ' + dados.nome + ' Telefone: ' + dados.telefone + ' Categoria: ' + dados.categoria + ' Cidade: ' + dados.cidade + ' Plano: ' + dados.plano;
         window.open('https://wa.me/5588994893176?text=' + encodeURIComponent(msg), '_blank');
-      } else {
-        throw new Error('Erro ao salvar');
-      }
+      } else { throw new Error('Erro ao salvar'); }
     }
-
   } catch (err) {
     if (btn) { btn.textContent = 'Enviar'; btn.disabled = false; }
     alert('Ocorreu um erro ao enviar. Tente novamente ou entre em contato pelo WhatsApp.');
@@ -238,11 +246,9 @@ document.addEventListener('DOMContentLoaded', function() {
   setupCheckboxes();
   setupUpload('fotos-input', 'fotos-area', 'fotos-count', 8);
   setupUpload('fotos-prestador', 'area-prestador', 'count-prestador', 3);
-
   document.querySelectorAll('input, select, textarea').forEach(function(el) {
     el.addEventListener('input', updateProgress);
     el.addEventListener('change', updateProgress);
   });
-
   updateProgress();
 });
